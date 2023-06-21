@@ -8,7 +8,46 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
 
+#define HRML(k1, k2, k3, k4) &ht k1 k1  &ht k2 k2  &ht k3 k3  &ht k4 k4
+#define HRMR(k1, k2, k3, k4) &ht k1 k1  &ht k2 k2  &ht k3 k3  &ht k4 k4
+
 / {
+
+
+/*
+  	behaviors {
+        	td0: tap_dance_0 {
+            		compatible = "zmk,behavior-tap-dance";
+            		label = "TAP_DANCE_0";
+            		#binding-cells = <0>;
+            		tapping-term-ms = <200>;
+            		bindings = <&kp LGUI>, <&kp LGUI>;
+        	};
+    	};
+*/
+    	behaviors {
+        	ht: hold_tap {
+            		compatible = "zmk,behavior-hold-tap";
+            		label = "HOLD_TAP";
+            		#binding-cells = <2>;
+            		flavor = "tap-preferred";
+            		tapping-term-ms = <220>;
+            		quick-tap-ms = <150>;
+			global-quick-tap;
+            		bindings = <&kp>, <&kp>;
+        };
+    };
+
+
+    	combos {
+        	compatible = "zmk,combos";
+	        combo_esc {
+            		timeout-ms = <50>;
+            		key-positions = <1 2>;
+            		bindings = <&kp ESC>;
+        	};
+    	};
+
         keymap {
                 compatible = "zmk,keymap";
 
@@ -38,7 +77,7 @@
      &kp ESC      &kp Q   &kp W     &kp E     &kp R    &kp T         &kp Y    &kp U     &kp I        &kp O       &kp P       &kp BSLH
 // |----------------------------------------------------------     --------------------------------------------------------------------|
 // | SHIFT     |  A     |  S     |  D      |  F     |  G      |   |  H     |  J      |  K         |  L        |  UP         | TAB      |
-     &kp LSHFT    &kp A    &kp S    &kp D     &kp F    &kp G         &kp H    &kp J     &kp K        &kp L       &kp UP       &kp TAB
+     &kp LSHFT   HRML(A,   S,       D,        F)       &kp G         &kp H   HRMR(J,    K,           L,          UP)          &kp TAB
 // |----------------------------------------------------------     --------------------------------------------------------------------|   
 // | CTRL      |  Z     |  X     |  C      |  V     |  B      |   |  N     |  M      |  ;         |  LEFT     |  DOWN       | RIGHT    |
      &kp LCTRL   &kp Z    &kp X    &kp C     &kp V    &kp B         &kp N    &kp M     &kp SEMI    &kp LEFT     &kp DOWN    &kp RIGHT
