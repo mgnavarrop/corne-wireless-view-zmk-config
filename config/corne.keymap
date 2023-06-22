@@ -13,18 +13,6 @@
 
 / {
 
-
-/*
-  	behaviors {
-        	td0: tap_dance_0 {
-            		compatible = "zmk,behavior-tap-dance";
-            		label = "TAP_DANCE_0";
-            		#binding-cells = <0>;
-            		tapping-term-ms = <200>;
-            		bindings = <&kp LGUI>, <&kp LGUI>;
-        	};
-    	};
-*/
     	behaviors {
         	ht: hold_tap {
             		compatible = "zmk,behavior-hold-tap";
@@ -36,11 +24,24 @@
 			global-quick-tap;
             		bindings = <&kp>, <&kp>;
         	};
+
+                td0: tap_dance_0 {
+                        compatible = "zmk,behavior-tap-dance";
+                        label = "TAP_DANCE_BROWSER";
+                        #binding-cells = <0>;
+                        tapping-term-ms = <300>;
+                        bindings = <&kp LGUI>, <&mo 3>;
+                };
     	};
 
     	combos {
         	compatible = "zmk,combos";
-	        combo_esc {
+	        combo_esc0 {
+            		timeout-ms = <50>;
+            		key-positions = <0 1>;
+            		bindings = <&kp ESC>;
+        	};
+		combo_esc1 {
             		timeout-ms = <50>;
             		key-positions = <1 2>;
             		bindings = <&kp ESC>;
@@ -53,8 +54,20 @@
         	    compatible = "zmk,behavior-macro";
 	            #binding-cells = <0>;
         	    bindings
-	                = <&kp RALT &kp N>
-        	        , <&kp N>
+	                = <&macro_press &kp RALT>
+			, <&macro_tap &kp N>
+			, <&macro_release &kp RALT>
+			, <&macro_tap &kp N>
+	                ;
+        	};
+        	macro_0: macro_0 {
+	            label = "MACRO_0";
+        	    compatible = "zmk,behavior-macro";
+	            #binding-cells = <0>;
+        	    bindings
+	                = <&macro_press &kp LGUI>
+			, <&macro_tap &kp GRAVE>
+			, <&macro_release &kp LGUI>
 	                ;
         	};
 	};
@@ -75,21 +88,21 @@
      &kp LCTRL   &kp Z    &kp X    &kp C     &kp V    &kp B         &kp N    &kp M     &kp COMMA     &kp LEFT    &kp DOWN     &kp RIGHT
 // |----------------------------------------------------------     --------------------------------------------------------------------|     
 //                               | GUI     | LWR    | SPC     |   | ENT    | RSE     | BSPC      |
-                                   &kp LGUI  &mo 1    &kp SPACE     &kp RET  &mo 2     &kp BSPC
+                                   &td0      &mo 1    &kp SPACE     &kp RET  &mo 2     &kp BSPC
                         >;
                 };
 
                 left_layer {
                         bindings = <
 //  ----------------------------------------------------------------------     -------------------------------------------------------------------------  
-// |  `          |  !        |  @       |  #       |  $       |  %        |   |  ^        |  &       |  *              |  (       |  )       | "|"      |                        
-      &kp GRAVE     &kp EXCL    &kp AT    &kp HASH   &kp DLLR   &kp PRCNT       &kp CARET   &kp AMPS   &kp KP_MULTIPLY   &kp LPAR   &kp RPAR   &kp PIPE
+// |  `          |  !        |  @       |  #       |  $       |  %        |   |  ^        |  &       |  *              |  (       |  )       | \        |                        
+      &kp GRAVE     &kp EXCL    &kp AT    &kp HASH   &kp DLLR   &kp PRCNT       &kp CARET   &kp AMPS   &kp KP_MULTIPLY   &kp LPAR   &kp RPAR   &kp BSLH
 //  ----------------------------------------------------------------------     -------------------------------------------------------------------------      
-// |             |           |          |          |          |           |   |  -        |  +       |  =              |  [       |  ]       |  ;       |
-     &trans         &trans      &trans    &trans     &trans     &trans          &kp MINUS   &kp PLUS  &kp EQUAL          &kp LBKT   &kp RBKT   &kp SEMI
+// |             |           |          | HOME     | END      | PAGE_UP   |   |  -        |  +       |  =              |  [       |  ]       |  ;       |
+     &trans         &trans      &trans    &kp HOME   &kp END    &kp PG_UP       &kp MINUS   &kp PLUS  &kp EQUAL          &kp LBKT   &kp RBKT   &kp SEMI
 //  ----------------------------------------------------------------------     -------------------------------------------------------------------------     
-// |             |           |          |          |          |           |   |  _        |  ~       |  ,              |  .       |  /       |  '       |
-     &trans         &trans      &trans    &trans     &trans     &trans          &kp UNDER   &kp TILDE   &kp COMMA          &kp DOT   &kp FSLH   &kp SQT
+// |             |           |          |          |          | PAGE_DOWN |   |  _        |  ~       |  ,              |  .       |  /       |  '       |
+     &trans         &trans      &trans    &trans     &trans     &kp PG_DN       &kp UNDER   &kp TILDE   &kp COMMA          &kp DOT   &kp FSLH   &kp SQT
 //  ----------------------------------------------------------------------     -------------------------------------------------------------------------        
 //                                      | DEL      |          | SPC       |   | ENT       |          | BSPC            |   
                     	                  &kp DEL    &trans     &kp SPACE       &kp RET     &trans     &kp BSPC
@@ -99,8 +112,8 @@
                 right_layer {
                         bindings = <
 //  ----------------------------------------------------------------------     -----------------------------------------------------------------  
-// |  `         |  1        |  2        |  3      |  4        |  5        |   | 6        |  7       |  8       |  9        |  0      | ALT      |                        
-      &kp GRAVE    &kp N1      &kp N2      &kp N3    &kp N4      &kp N5         &kp N6      &kp N7    &kp N8     &kp N9     &kp N0    &kp RALT
+// |  0         |  1        |  2        |  3      |  4        |  5        |   | 6        |  7       |  8       |  9        |  0      | ALT      |                        
+      &kp N0       &kp N1      &kp N2      &kp N3    &kp N4      &kp N5         &kp N6      &kp N7    &kp N8     &kp N9     &kp N0    &kp RALT
 //  ----------------------------------------------------------------------     -----------------------------------------------------------------  
 // |            |           |           |         |           |           |   | LFT      | DWN      |  UP      | RGT       |         | F12      |   
      &trans        &trans      &trans      &trans    &trans     &trans          &kp LEFT   &kp DOWN    &kp UP    &kp RIGHT   &trans    &kp F12
@@ -112,5 +125,23 @@
                                        	  &kp LGUI   &trans      &kp SPACE      &kp RET    &trans     &kp BSPC
                         >;
                 };
+
+                special_left_layer {
+                        bindings = <
+//  ----------------------------------------------------------------------     -------------------------------------------------------------------------  
+// |  GUI + `    |  !        |  @       |  #       |  $       |  %        |   |  ^        |  &       |  *              |  (       |  )       | "|"      |                        
+      &macro_0      &kp EXCL    &kp AT    &kp HASH   &kp DLLR   &kp PRCNT       &kp CARET   &kp AMPS   &kp KP_MULTIPLY  &kp LPAR   &kp RPAR   &kp PIPE
+//  ----------------------------------------------------------------------     -------------------------------------------------------------------------      
+// |             |           |          | HOME     | END      | PAGE_UP   |   |  -        |  +       |  =              |  [ -> {  |  ] -> }  |  ; -> :  |
+     &trans         &trans      &trans    &kp HOME   &kp END    &kp PG_UP       &kp MINUS   &kp PLUS  &kp EQUAL        &kp LS(LBKT) &kp LS(RBKT) &kp LS(SEMI)
+//  ----------------------------------------------------------------------     -------------------------------------------------------------------------     
+// |             |           |          |          |          | PAGE_DOWN |   |  _        |  ñ       |  , -> <         |  . -> >  |  / -> ?  |  ' -> "  |
+     &trans         &trans      &trans    &trans     &trans     &kp PG_DN       &kp UNDER   &macro_n   &kp LS(COMMA)  &kp LS(DOT)   &kp LS(FSLH)   &kp LS(SQT)
+//  ----------------------------------------------------------------------     -------------------------------------------------------------------------        
+//                                      |          |          | SPC       |   | ENT       |          | BSPC            |   
+                    	                  &trans     &trans     &kp SPACE       &kp RET     &trans     &kp BSPC
+                        >;
+                };
+
         };
 };
