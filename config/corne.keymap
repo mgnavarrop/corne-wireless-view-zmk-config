@@ -60,6 +60,16 @@
 			, <&macro_tap &kp N>
 	                ;
         	};
+        	macro_tilde: macro_tilde {
+	            label = "MACRO_TILDE";
+        	    compatible = "zmk,behavior-macro";
+	            #binding-cells = <0>;
+        	    bindings
+	                = <&macro_press &kp RALT>
+			, <&macro_tap &kp E>
+			, <&macro_release &kp RALT>
+	                ;
+        	};
         	macro_0: macro_0 {
 	            label = "MACRO_0";
         	    compatible = "zmk,behavior-macro";
@@ -70,6 +80,25 @@
 			, <&macro_release &kp LGUI>
 	                ;
         	};
+        	macro_vim_w: macro_vim_w {
+	            label = "MACRO_W";
+        	    compatible = "zmk,behavior-macro";
+	            #binding-cells = <0>;
+        	    bindings
+	                = <&macro_tap &kp COLON>
+			, <&macro_tap &kp W>
+	                ;
+        	};
+        	macro_vim_q: macro_vim_q {
+	            label = "MACRO_Q";
+        	    compatible = "zmk,behavior-macro";
+	            #binding-cells = <0>;
+        	    bindings
+	                = <&macro_tap &kp COLON>
+			, <&macro_tap &kp Q>
+	                ;
+        	};
+
 	};
 
         keymap {
@@ -129,8 +158,8 @@
                 special_left_layer {
                         bindings = <
 //  ----------------------------------------------------------------------     -------------------------------------------------------------------------  
-// |  GUI + `    |  !        |  @       |  #       |  $       |  %        |   |  ^        |  &       |  *              |  (       |  )       | "|"      |                        
-      &macro_0      &kp EXCL    &kp AT    &kp HASH   &kp DLLR   &kp PRCNT       &kp CARET   &kp AMPS   &kp KP_MULTIPLY  &kp LPAR   &kp RPAR   &kp PIPE
+// |  GUI + `    |    :q       |  :w       | tilde |          |          |    |  ^        |  &       |  *              |  (       |  )       | "|"      |                        
+      &macro_0    &macro_vim_q &macro_vim_w &macro_tilde &trans  &trans         &kp CARET   &kp AMPS   &kp KP_MULTIPLY  &kp LPAR   &kp RPAR   &kp PIPE
 //  ----------------------------------------------------------------------     -------------------------------------------------------------------------      
 // |             |           |          | HOME     | END      | PAGE_UP   |   |  -        |  +       |  =              |  [ -> {  |  ] -> }  |  ; -> :  |
      &trans         &trans      &trans    &kp HOME   &kp END    &kp PG_UP       &kp MINUS   &kp PLUS  &kp EQUAL        &kp LS(LBKT) &kp LS(RBKT) &kp LS(SEMI)
