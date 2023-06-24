@@ -11,8 +11,11 @@
 #define HRML(k1, k2, k3, k4) &ht k1 k1  &ht k2 k2  &ht k3 k3  &ht k4 k4
 #define HRMR(k1, k2, k3, k4) &ht k1 k1  &ht k2 k2  &ht k3 k3  &ht k4 k4
 
-/ {
+&key_repeat {
+	usage-pages = <HID_USAGE_KEY HID_USAGE_CONSUMER>;
+};
 
+/ {
     	behaviors {
         	ht: hold_tap {
             		compatible = "zmk,behavior-hold-tap";
@@ -24,7 +27,13 @@
 			global-quick-tap;
             		bindings = <&kp>, <&kp>;
         	};
-
+                td_l: tap_dance_l {
+                        compatible = "zmk,behavior-tap-dance";
+                        label = "TAP_DANCE_LEFT_LAYER";
+                        #binding-cells = <0>;
+                        tapping-term-ms = <300>;
+                        bindings = <&mo 1>, <&key_repeat>;
+                };
                 td0: tap_dance_0 {
                         compatible = "zmk,behavior-tap-dance";
                         label = "TAP_DANCE_BROWSER";
@@ -32,6 +41,7 @@
                         tapping-term-ms = <300>;
                         bindings = <&kp LGUI>, <&mo 3>;
                 };
+
     	};
 
     	combos {
@@ -117,7 +127,7 @@
      &kp LCTRL   &kp Z    &kp X    &kp C     &kp V    &kp B         &kp N    &kp M     &kp COMMA     &kp LEFT    &kp DOWN     &kp RIGHT
 // |----------------------------------------------------------     --------------------------------------------------------------------|     
 //                               | GUI     | LWR    | SPC     |   | ENT    | RSE     | BSPC      |
-                                   &td0      &mo 1    &kp SPACE     &kp RET  &mo 2     &kp BSPC
+                                 &td0       &td_l     &kp SPACE     &kp RET  &mo 2     &kp BSPC
                         >;
                 };
 
