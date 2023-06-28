@@ -193,8 +193,8 @@
 // |            |           |           |         |           |           |   |          | LEFT     | DOWN     | RIGHT     |         |          |   
      &trans       &trans      &trans      &trans    &trans     &trans           &trans     &kp LEFT   &kp DOWN   &kp RIGHT    &trans    &trans
 //  ----------------------------------------------------------------------     -----------------------------------------------------------------          
-//                                      |         |           |  SPC      |   | ENT      | XXXXXXX  |          |
-                                       	  &trans     &trans      &kp SPACE      &kp RET    &trans     &trans
+//                                      |         |           |  SPC      |   | ENT      | XXXXXXX  | toggle layer  |
+                                       	  &trans     &trans      &kp SPACE      &kp RET    &trans     &tog L_RIGHT 
                         >;
                 };
 
