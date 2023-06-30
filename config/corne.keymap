@@ -50,8 +50,15 @@
                         compatible = "zmk,behavior-tap-dance";
                         label = "TD_REPEAT";
                         #binding-cells = <0>;
+                        tapping-term-ms = <220>;
+                        bindings = <&kp RCTRL>, <&key_repeat>;
+                };
+                td_gui: tap_dance_gui {
+                        compatible = "zmk,behavior-tap-dance";
+                        label = "TD_GUI";
+                        #binding-cells = <0>;
                         tapping-term-ms = <300>;
-                        bindings = <&kp LGUI>, <&key_repeat>;
+                        bindings = <&kp LGUI>, <&mo L_SPECIAL>;
                 };
                 td_l: tap_dance_l {
                         compatible = "zmk,behavior-tap-dance";
@@ -164,10 +171,10 @@
      &td_caps    HRML(A,   S,       D,        F)       &kp G         &kp H   HRMRR(J,    K,           L)         &kp UP       &kp SEMI
 // |----------------------------------------------------------     --------------------------------------------------------------------|   
 // | CTRL      |  Z     |  X     |  C      |  V     |  B      |   |  N     |  M      |  ,         |  LEFT     | DOWN        | RIGHT    |
-     &kp LCTRL   &kp Z    &kp X    &kp C     &kp V    &kp B         &kp N    &kp M     &kp COMMA     &kp LEFT    &kp DOWN     &kp RIGHT
+     &td_rep     &kp Z    &kp X    &kp C     &kp V    &kp B         &kp N    &kp M     &kp COMMA     &kp LEFT    &kp DOWN     &kp RIGHT
 // |----------------------------------------------------------     --------------------------------------------------------------------|     
-//                           | GUI / REPEAT | LAYERS | SPC    |   | ENT    | LAYERS  | BSPC      |
-                                  &td_rep      &td_l   &kp SPACE    &kp RET  &td_r     &kp BSPC
+//                          | GUI / SPECIAL | LAYERS | SPC    |   | ENT    | LAYERS  | BSPC      |
+                                  &td_gui     &td_l   &kp SPACE    &kp RET  &td_r     &kp BSPC
                         >;
                 };
 
@@ -208,8 +215,8 @@
                 special_layer {
                         bindings = <
 //  ----------------------------------------------------------------------     -------------------------------------------------------------------------  
-// |             |           |  +       | 7        | 8        | 9         |    | F1       | F4       | F7              | F10      |          | MUTE     |                      
-      &trans        &trans      &kp PLUS  &kp N7     &kp N8     &kp N9          &kp F1      &kp F4     &kp F7            &kp F10    &trans     &kp K_MUTE
+// |  GUI+`      |           |  +       | 7        | 8        | 9         |    | F1       | F4       | F7              | F10      |          | MUTE     |                      
+      &kp LG(GRAVE) &trans      &kp PLUS  &kp N7     &kp N8     &kp N9          &kp F1      &kp F4     &kp F7            &kp F10    &trans     &kp K_MUTE
 //  ----------------------------------------------------------------------     -------------------------------------------------------------------------      
 // | + BRIGHT    |           |  -       | 4        | 5        | 6         |   | F2        | F5       | F8              | F11      |          | + VOL    |
      &kp C_BRI_UP   &trans      &kp MINUS  &kp N4    &kp N5     &kp N6          &kp F2      &kp F5     &kp F8            &kp F11    &trans     &kp C_VOL_UP
