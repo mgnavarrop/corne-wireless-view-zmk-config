@@ -15,6 +15,7 @@
 
 #define HRML(k1, k2, k3, k4) &ht LALT k1  &ht LCTRL k2  &ht LSHFT k3  &ht LGUI k4
 #define HRMR(k1, k2, k3, k4) &ht RGUI k1  &ht RSHFT k2  &ht RCTRL k3  &ht RALT k4
+#define HRMRR(k1, k2, k3) &ht RGUI k1  &ht RSHFT k2  &ht RCTRL k3
 //#define LRTL(k) &layert L_LEFT k
 
 &key_repeat {
@@ -159,8 +160,8 @@
 // |   TAB     |  Q     |  W     |  E      |  R     |  T      |   |  Y     |  U      |  I         |  O        |  P          | \        |                        
      &kp TAB      &kp Q   &kp W     &kp E     &kp R    &kp T         &kp Y    &kp U     &kp I        &kp O       &kp P        &kp BSLH
 // |----------------------------------------------------------     --------------------------------------------------------------------|
-// | SHIFT / CAPS |  A  |  S     |  D      |  F     |  G      |   |  H     |  J      |  K         |  L        |  UP         |  ;      |
-     &td_caps    HRML(A,   S,       D,        F)       &kp G         &kp H   HRMR(J,    K,           L,          UP)          &kp SEMI
+// | SHIFT / CAPS |  A  |  S     |  D      |  F     |  G      |   |  H     |  J      |  K         |  L        |  UP         |  ;       |
+     &td_caps    HRML(A,   S,       D,        F)       &kp G         &kp H   HRMRR(J,    K,           L)         &kp UP       &kp SEMI
 // |----------------------------------------------------------     --------------------------------------------------------------------|   
 // | CTRL      |  Z     |  X     |  C      |  V     |  B      |   |  N     |  M      |  ,         |  LEFT     | DOWN        | RIGHT    |
      &kp LCTRL   &kp Z    &kp X    &kp C     &kp V    &kp B         &kp N    &kp M     &kp COMMA     &kp LEFT    &kp DOWN     &kp RIGHT
@@ -194,7 +195,7 @@
       &kp N0       &kp N1      &kp N2      &kp N3    &kp N4      &kp N5         &kp N6      &kp N7    &kp N8     &kp N9     &kp N0     &trans
 //  ----------------------------------------------------------------------     -----------------------------------------------------------------  
 // |            |           |           |         |           |           |   |          |          |          |           |         | F12      |   
-     &trans    HRML(LALT,      LCTRL,      LSHFT,    LGUI)      &trans          &trans     &trans     &trans      &trans      &trans   &kp F12
+     &trans    HRML(LALT,      LCTRL,      LSHFT,    LGUI)      &trans        HRMR(RGUI,   RSHFT,     RCTRL,     RALT)       &trans   &kp F12
 //  ----------------------------------------------------------------------     -----------------------------------------------------------------     
 // |            | F1        | F2        | F3      | F4        |  F5       |   | F6       | F7       | F8       | F9        | F10     | F11      |   
      &trans       &kp F1      &kp F2      &kp F3    &kp F4       &kp F5         &kp F6     &kp F7     &kp F8     &kp F9      &kp F10   &kp F11
@@ -207,14 +208,14 @@
                 special_layer {
                         bindings = <
 //  ----------------------------------------------------------------------     -------------------------------------------------------------------------  
-// |             |           |          | 7        | 8        | 9         |    | F1       | F4       | F7              | F10      |          | MUTE     |                      
-      &trans        &trans      &trans    &kp N7     &kp N8     &kp N9          &kp F1      &kp F4     &kp F7            &kp F10    &trans     &kp K_MUTE
+// |             |           |  +       | 7        | 8        | 9         |    | F1       | F4       | F7              | F10      |          | MUTE     |                      
+      &trans        &trans      &kp PLUS  &kp N7     &kp N8     &kp N9          &kp F1      &kp F4     &kp F7            &kp F10    &trans     &kp K_MUTE
 //  ----------------------------------------------------------------------     -------------------------------------------------------------------------      
-// | + BRIGHT    |           |          | 4        | 5        | 6         |   | F2        | F5       | F8              | F11      |          | + VOL    |
-     &kp C_BRI_UP   &trans      &trans    &kp N4     &kp N5     &kp N6          &kp F2      &kp F5     &kp F8            &kp F11    &trans     &kp C_VOL_UP
+// | + BRIGHT    |           |  -       | 4        | 5        | 6         |   | F2        | F5       | F8              | F11      |          | + VOL    |
+     &kp C_BRI_UP   &trans      &kp MINUS  &kp N4    &kp N5     &kp N6          &kp F2      &kp F5     &kp F8            &kp F11    &trans     &kp C_VOL_UP
 //  ----------------------------------------------------------------------     -------------------------------------------------------------------------     
-// | - BRIGHT    |           |          | 1        | 2        | 3         |   | F3        | F6       | F9              | F12      |          | - VOL    |
-     &kp C_BRI_DN   &trans      &trans    &kp N1     &kp N2     &kp N3          &kp F3       &kp F6    &kp F9            &kp F12    &trans     &kp C_VOL_DN
+// | - BRIGHT    |           |  *       | 1        | 2        | 3         |   | F3        | F6       | F9              | F12      |          | - VOL    |
+     &kp C_BRI_DN   &trans  &kp KP_MULTIPLY &kp N1   &kp N2     &kp N3          &kp F3       &kp F6    &kp F9            &kp F12    &trans     &kp C_VOL_DN
 //  ----------------------------------------------------------------------     -------------------------------------------------------------------------        
 //                                      | 0        | XXXXX    | SPC       |   | ENT       | XXXXXXXX |                 |   
                     	                  &kp N0     &trans     &kp SPACE       &kp RET     &trans     &trans
